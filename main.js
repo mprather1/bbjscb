@@ -1,5 +1,9 @@
 var InvoiceItemModel = Backbone.Model.extend({
-
+  defaults: {
+    quantity: 1,
+    description: 'itme',
+    price: 21.22
+  }
 });
 
 var InvoiceItemCollection = Backbone.Collection.extend({
@@ -22,3 +26,30 @@ var InvoiceItemView = Backbone.View.extend({
     return this;
   }
 });
+
+var InvoiceItemListView = Backbone.View.extend({
+
+  tagName: 'table',
+
+  className: 'invoice-item-view',
+
+  render: function() {
+
+    $(this.el).empty()
+    $(this.el).append($('<tr></tr>').html(
+      _.map(['Quantity', 'Description', 'Price', 'Total'],
+        function(val, key) {
+          return '<th>' + val + '</th>'
+        })
+    ));
+
+    $(this.el).append(
+      _.map(this.collection.models, function(model, key) {
+        return new InvoiceItemView({
+          model: model
+        }).render().el;
+      })
+    );
+    return this;
+  }
+})
