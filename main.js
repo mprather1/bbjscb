@@ -52,4 +52,13 @@ var InvoiceItemListView = Backbone.View.extend({
     );
     return this;
   }
-})
+});
+
+var InvoiceItemListPageView = Backbone.View.extend({
+
+  render: function() {
+    $(this.el).html(new InvoiceItemListView ({
+      collection: this.collection
+    }).render().el);
+  }
+});
