@@ -18,8 +18,8 @@ var InvoiceItemView = Backbone.View.extend({
     $(this.el).html(_.map([
       this.model.get('quantity'),
       this.model.get('description'),
-      this.model.get('price'),
-      this.modle.calculateAmount(),
+      this.model.get('price')
+
     ], function(val, key) {
       return '<td>' + val + '</td>'
     }));
@@ -62,3 +62,15 @@ var InvoiceItemListPageView = Backbone.View.extend({
     }).render().el);
   }
 });
+
+var invoiceItemCollection = new InvoiceItemCollection([
+  { description: 'Wooden Toy House', price: 22, quantity: 3 },
+  { description: 'Farm Animal Set', price: 17, quantity: 1 },
+  { description: 'Farmer Figure', price: 8, quantity: 1 },
+  { description: 'Toy Tractor', price: 15, quantity: 1 }
+]);
+
+new InvoiceItemListPageView({
+  collection: invoiceItemCollection,
+  el: 'body'
+}).render();
