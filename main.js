@@ -18,13 +18,19 @@ var InvoiceItemView = Backbone.View.extend({
     $(this.el).html(_.map([
       this.model.get('quantity'),
       this.model.get('description'),
-      this.model.get('price')
+      this.model.get('price'), this.calculateAmount()
 
     ], function(val, key) {
       return '<td>' + val + '</td>'
     }));
     return this;
-  }
+  },
+
+  calculateAmount: function(){
+      return this.model.get('price')*this.model.get('quantity');
+      }
+
+
 });
 
 var InvoiceItemListView = Backbone.View.extend({
@@ -66,7 +72,7 @@ var InvoiceItemListPageView = Backbone.View.extend({
 var invoiceItemCollection = new InvoiceItemCollection([
   { description: 'Wooden Toy House', price: 22, quantity: 3 },
   { description: 'Farm Animal Set', price: 17, quantity: 1 },
-  { description: 'Farmer Figure', price: 8, quantity: 1 },
+  { description: 'Farmer Figure', price: 8, quantity: 6 },
   { description: 'Toy Tractor', price: 15, quantity: 1 }
 ]);
 
